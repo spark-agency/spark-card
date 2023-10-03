@@ -3,16 +3,36 @@ export default {
         label: {
             en: 'Spark Card',
         },
-        icon: 'fire',
+        icon: 'collection',
+        bubble: {
+            icon: 'collection',
+        },
         excludedSections: ['spacing', 'positioning', 'background', 'styling', 'display'],
         customStylePropertiesOrder: [
-            ['elevationTitle', 'elevation', 'elevationInfo'],
+            'info',
+            ['elevationTitle', 'elevation'],
             ['roundnessTitle', 'roundness', 'customRoundness'],
             ['paddingTitle', 'padding', 'customPadding'],
-            ['themeTitle', 'color', 'bgColor', 'borderColor', 'isDarkMode'],
+            ['themeTitle', 'colors', 'customBgColor', 'customBorderColor', 'isDarkMode'],
         ],
     },
     properties: {
+        info: {
+            label: {
+                en: 'Spark Card',
+            },
+
+            // Type
+            type: 'Info',
+
+            // Config
+            options: {
+                text: { en: 'Find the docs <a href="https://spark-ui.com/card" target="blank" style="text-decoration: underline; display: inline">here</a>.' },
+            },
+            editorOnly: true,
+            section: 'style',
+        },
+
         elevationTitle: {
             label: {
                 en: 'Elevation',
@@ -54,23 +74,6 @@ export default {
                 type: 'string',
                 tooltip: 'One of the following: `"none", "small", "medium", "large"`',
             },
-        },
-
-        elevationInfo: {
-            label: {
-                en: 'Info',
-            },
-
-            // Type
-            type: 'Info',
-
-            // Config
-            options: {
-                text: { en: 'Based on the elevation, the bg color gets picked and a shadow is added.' },
-            },
-            editorOnly: true,
-            section: 'style',
-            // hidden: content => !content.showDocs,
         },
 
         roundnessTitle: {
@@ -230,7 +233,7 @@ export default {
             editorOnly: true,
         },
 
-        color: {
+        colors: {
             label: {
                 en: 'Colors',
             },
@@ -259,7 +262,7 @@ export default {
             },
         },
 
-        bgColor: {
+        customBgColor: {
             label: {
                 en: 'Background Color',
             },
@@ -282,10 +285,10 @@ export default {
             },
 
             // Config
-            hidden: content => content.color !== 'custom',
+            hidden: content => content.colors !== 'custom',
         },
 
-        borderColor: {
+        customBorderColor: {
             label: {
                 en: 'Border Color',
             },
@@ -308,7 +311,7 @@ export default {
             },
 
             // Config
-            hidden: content => content.color !== 'custom',
+            hidden: content => content.colors !== 'custom',
         },
 
         isDarkMode: {
@@ -334,7 +337,20 @@ export default {
             },
 
             // Config
-            hidden: content => content.color == 'custom',
+            hidden: content => content.colors === 'custom',
+        },
+
+        content: {
+            defaultValue: [
+                {
+                    isWwObject: true,
+                    type: "ww-flexbox",
+                    style: {
+                        height: "100px",
+                        width: "200px"
+                    }
+                },
+            ],
         },
     },
 };

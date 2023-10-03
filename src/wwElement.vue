@@ -1,5 +1,13 @@
 <template>
-    <div class="container" :class="{ shadow: showShadow }" :style="rootStyle"></div>
+    <div class="container" :class="{ shadow: showShadow }" :style="rootStyle">
+        <wwLayout
+            class="dropzone"
+            direction="column"
+            path="content"
+            ww-responsive="card-dropzone"
+            :inherit-from-element="['width']"
+        ></wwLayout>
+    </div>
 </template>
 
 <script>
@@ -17,6 +25,10 @@ export default {
                 black: '#1D1D2F',
                 blackElevated: '#272737',
             };
+
+            if (props.content.colors === 'custom') {
+                return props.content.customBgColor;
+            }
 
             if (!props.content.isDarkMode) {
                 return predefinedColors.white;
@@ -36,11 +48,15 @@ export default {
                 blackElevated: '#272737',
             };
 
+            if (props.content.colors === 'custom') {
+                return props.content.customBorderColor;
+            }
+
             if (!props.content.isDarkMode) {
                 return predefinedColors.white;
             }
 
-            if (props.content.elevation == 'elevated') {
+            if (props.content.elevation === 'elevated') {
                 return predefinedColors.blackElevated;
             }
 
@@ -87,7 +103,7 @@ export default {
             return {
                 '--background-color': this.bgColor,
                 '--border-color': this.borderColor,
-                '--padding': this.padding + 'px',
+                '--card-padding': this.padding + 'px',
                 '--border-radius': this.roundness + 'px',
             };
         },
@@ -99,11 +115,11 @@ export default {
 .container {
     background-color: var(--background-color);
     border: 1px solid var(--border-color);
-    padding: var(--padding);
+    padding: var(--card-padding) !important;
     border-radius: var(--border-radius);
     box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
+
+    transition: background-color 300ms ease-in-out, box-shadow 300ms ease-in-out;
 }
 
 .shadow {
