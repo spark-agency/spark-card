@@ -27,7 +27,7 @@ export default {
 
             // Config
             options: {
-                text: { en: 'Find the docs <a href="https://spark-ui.com/card" target="blank" style="text-decoration: underline; display: inline">here</a>.' },
+                text: { en: 'Find the docs <a href="https://spark-ui.io/card" target="blank" style="text-decoration: underline; display: inline">here</a>.' },
             },
             editorOnly: true,
             section: 'style',
