@@ -1,7 +1,7 @@
 <template>
-    <div class="container" :class="{ shadow: showShadow }" :style="rootStyle">
+    <div class="spark-card" :class="{ shadow: showShadow }" :style="rootStyle">
         <wwLayout
-            class="dropzone"
+            class="spark-card__dropzone"
             direction="column"
             path="content"
             ww-responsive="card-dropzone"
@@ -101,10 +101,10 @@ export default {
     computed: {
         rootStyle() {
             return {
-                '--background-color': this.bgColor,
-                '--border-color': this.borderColor,
-                '--card-padding': this.padding + 'px',
-                '--border-radius': this.roundness + 'px',
+                '--spark-card-background-color': this.bgColor,
+                '--spark-card-border-color': this.borderColor,
+                '--spark-card-padding': this.padding + 'px',
+                '--spark-card-border-radius': this.roundness + 'px',
             };
         },
     },
@@ -112,11 +112,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-    background-color: var(--background-color);
-    border: 1px solid var(--border-color);
-    padding: var(--card-padding) !important;
-    border-radius: var(--border-radius);
+.spark-card {
+    background-color: var(--spark-card-background-color);
+    border: 1px solid var(--spark-card-border-color);
+    padding: var(--spark-card-padding) !important;
+    border-radius: var(--spark-card-border-radius);
     box-sizing: border-box;
 
     transition: background-color 300ms ease-in-out, box-shadow 300ms ease-in-out;
