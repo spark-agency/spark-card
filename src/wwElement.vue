@@ -13,6 +13,22 @@
 <script>
 import { computed } from 'vue';
 
+const COLORS = {
+    white: '#ffffff',
+    black: '#1D1D2F',
+    blackElevated: '#272737',
+};
+
+const ROUNDNESS = {
+    small: 12,
+    medium: 20,
+    large: 32,
+};
+
+const TRANSITION = 'background-color 250ms ease, border-color 250ms ease, box-shadow 300ms ease';
+
+const DEFAULT_SHADOW = '0px 6px 16px 0px rgba(0, 0, 0, 0.12)';
+
 export default {
     props: {
         content: { type: Object, required: true },
@@ -20,47 +36,35 @@ export default {
 
     setup(props) {
         const bgColor = computed(() => {
-            const predefinedColors = {
-                white: '#ffffff',
-                black: '#1D1D2F',
-                blackElevated: '#272737',
-            };
-
             if (props.content.colors === 'custom') {
                 return props.content.customBgColor;
             }
 
             if (!props.content.isDarkMode) {
-                return predefinedColors.white;
+                return COLORS.white;
             }
 
             if (props.content.elevation == 'elevated') {
-                return predefinedColors.blackElevated;
+                return COLORS.blackElevated;
             }
 
-            return predefinedColors.black;
+            return COLORS.black;
         });
 
         const borderColor = computed(() => {
-            const predefinedColors = {
-                white: '#ffffff',
-                black: '#1D1D2F',
-                blackElevated: '#272737',
-            };
-
             if (props.content.colors === 'custom') {
                 return props.content.customBorderColor;
             }
 
             if (!props.content.isDarkMode) {
-                return predefinedColors.white;
+                return COLORS.white;
             }
 
             if (props.content.elevation === 'elevated') {
-                return predefinedColors.blackElevated;
+                return COLORS.blackElevated;
             }
 
-            return predefinedColors.black;
+            return COLORS.black;
         });
 
         const padding = computed(() => {
@@ -78,17 +82,11 @@ export default {
         });
 
         const roundness = computed(() => {
-            const predefinedRoundness = {
-                small: 12,
-                medium: 20,
-                large: 32,
-            };
-
             if (props.content.roundness === 'custom') {
                 return props.content.customRoundness;
             }
 
-            return predefinedRoundness[props.content.roundness];
+            return ROUNDNESS[props.content.roundness];
         });
 
         const showShadow = computed(() => {
@@ -105,6 +103,8 @@ export default {
                 '--spark-card-border-color': this.borderColor,
                 '--spark-card-padding': this.padding + 'px',
                 '--spark-card-border-radius': this.roundness + 'px',
+                '--spark-card-shadow': DEFAULT_SHADOW,
+                '--spark-card-transition': TRANSITION,
             };
         },
     },
@@ -119,10 +119,10 @@ export default {
     border-radius: var(--spark-card-border-radius);
     box-sizing: border-box;
 
-    transition: background-color 300ms ease-in-out, box-shadow 300ms ease-in-out;
+    transition: var(--spark-card-transition);
 }
 
 .shadow {
-    box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--spark-card-shadow);
 }
 </style>
